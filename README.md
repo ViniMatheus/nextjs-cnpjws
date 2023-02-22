@@ -4,10 +4,9 @@
 
 
 ## Instalação
-
-```shell
+```bash
 npm i
-``
+```
 
 ## Iniciar
 
