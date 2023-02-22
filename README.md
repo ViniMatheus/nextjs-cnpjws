@@ -1,6 +1,6 @@
 ## API publica para consulta de CNPJ em NextJS utilizando o cnpj.ws 
 
-<a href="https://nextjs-cnpjws.vercel.app" target="_blank">Demo</a>
+<a href="https://nextjs-cnpjws-rkij.vercel.app/" target="_blank">Demo</a>
 
 
 ## Instalação
