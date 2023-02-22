@@ -3,12 +3,23 @@
 <a href="https://nextjs-cnpjws.vercel.app" target="_blank">Demo</a>
 
 
-## Installation
+## Instalação
 
 ```shell
 npm i
 ``
 
+## Iniciar
+
+First, run the development server:
+
+```bash
+npm run dev
+# or
+yarn dev
+# or
+pnpm dev
+```
 
 Ferramentas utilizada no projeto
 
