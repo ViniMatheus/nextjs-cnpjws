@@ -1,5 +1,6 @@
 import { FaBuilding } from "react-icons/fa";
 import { useState, useRef } from "react";
+import InputMask from "react-input-mask";
 
 export default function Home() {
   const [cnpj, setCnpj] = useState("");
@@ -8,22 +9,41 @@ export default function Home() {
   const telefoneRef = useRef<HTMLInputElement>(null);
   const dddRef = useRef<HTMLInputElement>(null);
   const fantasiaRef = useRef<HTMLInputElement>(null);
+  const [errorMessage, setErrorMessage] = useState("");
 
-
-  const consultarCNPJ = require('consultar-cnpj')
+  const consultarCNPJ = require("consultar-cnpj");
 
   async function handleGetCompanyData() {
+    try {
+      const empresa = await consultarCNPJ(`${cnpj}`);
 
-    const empresa = await consultarCNPJ(`${cnpj}`)
-
-    razaoSocialRef.current ? (razaoSocialRef.current.value = empresa.razao_social) : null;
-    emailRef.current ? (emailRef.current.value = empresa.estabelecimento.email) : null;
-    telefoneRef.current ? (telefoneRef.current.value = empresa.estabelecimento.telefone1) : null;
-    dddRef.current ? (dddRef.current.value = empresa.estabelecimento.ddd1) : null;
-    fantasiaRef.current ? (fantasiaRef.current.value = empresa.estabelecimento.nome_fantasia) : null;
-
-
+      razaoSocialRef.current
+        ? (razaoSocialRef.current.value = empresa.razao_social)
+        : null;
+      emailRef.current
+        ? (emailRef.current.value = empresa.estabelecimento.email)
+        : null;
+      telefoneRef.current
+        ? (telefoneRef.current.value = empresa.estabelecimento.telefone1)
+        : null;
+      dddRef.current
+        ? (dddRef.current.value = empresa.estabelecimento.ddd1)
+        : null;
+      fantasiaRef.current
+        ? (fantasiaRef.current.value = empresa.estabelecimento.nome_fantasia)
+        : null;
+    } catch (error) {
+      setErrorMessage(
+        "Ocorreu um erro ao carregar o cadastro da empresa. Por favor, verifique o CNPJ e tente novamente."
+      );
+    }
   }
+
+  function handleCnpjInput(event: React.ChangeEvent<HTMLInputElement>) {
+    setCnpj(event.target.value);
+    setErrorMessage("");
+  }
+
   return (
     <>
       <div className="flex justify-center items-center w-screen h-screen">
@@ -35,11 +55,12 @@ export default function Home() {
                 CNPJ
               </label>
               <div className="relative flex">
-                <input
+                <InputMask
                   className="shadow appearance-none border rounded w-full py-2 px-3 pr-10 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                   id="cnpj"
                   value={cnpj}
-                  onChange={(e) => setCnpj(e.target.value)}
+                  mask="99.999.999/9999-99"
+                  onChange={handleCnpjInput}
                 />
               </div>
               <FaBuilding
@@ -47,7 +68,9 @@ export default function Home() {
                 onClick={handleGetCompanyData}
               />
             </div>
-
+            {errorMessage && (
+              <div className="text-red-500 text-sm">{errorMessage}</div>
+            )}
             <div>
               <label
                 className="block text-gray-700 font-bold mb-2"
@@ -84,7 +107,8 @@ export default function Home() {
                 Telefone
               </label>
               <div className="flex ">
-                <input className="shadow appearance-none w-16 border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                <input
+                  className="shadow appearance-none w-16 border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                   id="ddd"
                   ref={dddRef}
                   type="number"
@@ -101,7 +125,6 @@ export default function Home() {
               <label
                 className="block text-gray-700 font-bold mb-2"
                 htmlFor="email"
-
               >
                 Email
               </label>
@@ -121,6 +144,6 @@ export default function Home() {
           </form>
         </div>
       </div>
-    </>
-  );
+    </>
+  );
 }
