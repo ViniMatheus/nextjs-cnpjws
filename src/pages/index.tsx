@@ -42,6 +42,7 @@ export default function Home() {
   function handleCnpjInput(event: React.ChangeEvent<HTMLInputElement>) {
     setCnpj(event.target.value);
     setErrorMessage("");
+    
   }
 
   return (
