@@ -13,16 +13,21 @@
     "@types/node": "18.14.0",
     "@types/react": "18.0.28",
     "@types/react-dom": "18.0.11",
+    "cnpj": "^4.0.1",
     "consultar-cnpj": "^1.0.15",
+    "cpf-cnpj-validator": "^1.0.3",
     "eslint": "8.34.0",
     "eslint-config-next": "13.1.6",
     "next": "13.1.6",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-icons": "^4.7.1",
-    "typescript": "4.9.5"
+    "react-input-mask": "^2.0.4",
+    "typescript": "4.9.5",
+    "validations-br": "^1.3.0"
   },
   "devDependencies": {
+    "@types/react-input-mask": "^3.0.2",
     "autoprefixer": "^10.4.13",
     "postcss": "^8.4.21",
     "tailwindcss": "^3.2.7"
